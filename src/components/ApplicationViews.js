@@ -8,5 +8,7 @@ export const ApplicationViews = () => {
             lineHeight: "1.75rem"
         }}>
         </main>
+
+        
     </>
 }
