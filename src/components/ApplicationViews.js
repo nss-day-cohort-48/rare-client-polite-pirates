@@ -2,6 +2,8 @@ import React from "react"
 import { Route } from "react-router-dom"
 import { CategoryList } from "./categories/CategoryList"
 import { CategoryProvider } from "./categories/CategoryProvider"
+import { PostProvider } from "./post/PostProvider";
+import { PostList } from "./post/PostList";
 
 export const ApplicationViews = () => {
     return (
