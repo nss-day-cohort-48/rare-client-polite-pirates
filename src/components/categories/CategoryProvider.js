@@ -25,7 +25,7 @@ export const CategoryProvider = (props) => {
             },
             body: JSON.stringify(category)
         })
-            .then(categories)
+            .then(getCategories)
     }
 
     const updateCategory = category => {

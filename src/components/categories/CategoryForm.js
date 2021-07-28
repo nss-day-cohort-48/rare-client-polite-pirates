@@ -7,7 +7,7 @@ export const CategoryForm = () => {
     const { categories, addCategory, getCategories } = useContext(CategoryContext)
     // LOOK AT ID FOR CATEGORIES
     // CONTROLLING STATE HERE
-    const [category, setCategory] = useState({})
+    const [category, setCategory] = useState({label: ""})
     const [isLoading, setIsLoading] = useState(true);
 
     const history = useHistory()
@@ -30,14 +30,17 @@ export const CategoryForm = () => {
                 label: category.label
             })
             .then(() => history.push("/categories"))
+            setCategory({label: ""})
           }
         
         
-        // GET CATEGORY LIST & EDIT FEATURE IF CATEGORY BY ID IS IN URL
+        // GET CATEGORY LIST 
        useEffect(() => {
           getCategories()
             setIsLoading(false)
         }, [])
+
+    
 
         return (
           <form className="category_form">
@@ -47,14 +50,14 @@ export const CategoryForm = () => {
                 <input type="text" id="category_form" name="label" required autoFocus className="form-control"
                 placeholder="add text"
                 onChange={handleControlledInputChange}
-                defaultValue={category.label}/>
+                value={category.label}/>
               </div>
             </fieldset>
             <button className="btn btn-primary"
               disabled={isLoading}
               onClick={event => {
-                event.preventDefault() // Prevent browser from submitting the form and refreshing the page
                 handleSaveCategory()
+                event.preventDefault() // Prevent browser from submitting the form and refreshing the page
               }}>Create</button>
           </form>
         )
