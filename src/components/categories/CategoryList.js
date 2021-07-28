@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from "react"
 import { CategoryContext } from "./CategoryProvider"
-import { Category } from "./Category"
+import { Category } from "./CategoryDetail"
 import "./Category.css"
 
 export const CategoryList = ({ history }) => {
