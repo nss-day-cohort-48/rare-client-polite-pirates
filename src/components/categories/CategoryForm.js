@@ -1,13 +1,16 @@
-import React, { useRef } from "react"
-import { Link } from "react-router-dom"
-import "./Auth.css"
+import React, { useContext, useEffect, useRef, useState } from "react"
+import { Link, useHistory } from "react-router-dom"
+import { CategoryContext } from "./CategoryProvider"
 
-export const Category_Form = () => {
+export const CategoryForm = () => {
     // PROVIDER INFO HERE
+    const { categories, addCategory, getCategories } = useContext(CategoryContext)
     // LOOK AT ID FOR CATEGORIES
     // CONTROLLING STATE HERE
     const [category, setCategory] = useState({})
     const [isLoading, setIsLoading] = useState(true);
+
+    const history = useHistory()
 
 
     // CONTROL INPUT CHANGE HERE
@@ -18,39 +21,22 @@ export const Category_Form = () => {
         setCategory(newCategory)
     }
 
-    // SAVE AND EDIT FUNCTION HERE
+    // SAVE FUNCTION HERE
     const handleSaveCategory = () => {
           //disable the button - no extra clicks
           setIsLoading(true);
-          if (id){
-            //PUT - update
-            updateCategory({
-                id: category.id,
-                label: category.label
-            })
-            .then(() => history.push(`/categories/detail/${category.id}`))
-          }else {
             //POST - add
-            addCategory({
+          addCategory({
                 label: category.label
             })
             .then(() => history.push("/categories"))
           }
-        }
+        
         
         // GET CATEGORY LIST & EDIT FEATURE IF CATEGORY BY ID IS IN URL
-        useEffect(() => {
-          getCategories().then(() => {
-            if (category_id){
-              getCategoryById(category_id)
-              .then(category => {
-                  setCategory(category)
-                  setIsLoading(false)
-              })
-            } else {
-              setIsLoading(false)
-            }
-          })
+       useEffect(() => {
+          getCategories()
+            setIsLoading(false)
         }, [])
 
         return (
@@ -69,8 +55,7 @@ export const Category_Form = () => {
               onClick={event => {
                 event.preventDefault() // Prevent browser from submitting the form and refreshing the page
                 handleSaveCategory()
-              }}>
-            {category_id ? <>Save</> : <>Create</>}</button>
+              }}>Create</button>
           </form>
         )
 
