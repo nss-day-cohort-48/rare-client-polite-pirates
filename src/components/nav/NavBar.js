@@ -1,10 +1,10 @@
-import React from "react"
-import { Link, useHistory } from "react-router-dom"
-import "./NavBar.css"
-import Logo from "./rare.jpeg"
+import React from "react";
+import { Link, useHistory } from "react-router-dom";
+import "./NavBar.css";
+import Logo from "./rare.jpeg";
 
 export const NavBar = () => {
-    const history = useHistory()
+  const history = useHistory();
 
     return (
         <ul className="navbar">
@@ -12,7 +12,10 @@ export const NavBar = () => {
                 <img className="navbar__logo" src={Logo} />
             </li>
             <li className="navbar__item">
-                <Link className="navbar__link" to="/">Posts</Link>
+                <Link className="navbar__link" to="/posts">Posts</Link>
+            </li>
+            <li className="navbar__item">
+                <Link className="navbar__link" to="/categories">Category Manager</Link>
             </li>
             {
                 (localStorage.getItem("rare_user_id") !== null) ?
