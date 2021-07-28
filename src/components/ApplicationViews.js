@@ -11,12 +11,18 @@ export const ApplicationViews = () => {
             lineHeight: "1.75rem"
         }}>
         </main>
+            <PostProvider>
             <CategoryProvider>
 
                 <Route exact path="/categories">
                     <CategoryList />
                 </Route>
 
+                <Route exact path="/posts">
+                    <PostList />
+                </Route>
+
             </CategoryProvider>
+            </PostProvider>
     </>
-    )}
+};
