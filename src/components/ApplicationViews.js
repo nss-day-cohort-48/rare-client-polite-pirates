@@ -5,6 +5,8 @@ import { CategoryList } from "./categories/CategoryList"
 import { CategoryProvider } from "./categories/CategoryProvider"
 import { PostProvider } from "./post/PostProvider"
 import { PostList } from "./post/PostList"
+import { CommentProvider } from "./comments/CommentProvider";
+import { CommentForm } from "./comments/CommentForm";
 
 export const ApplicationViews = () => {
     return (
@@ -16,6 +18,7 @@ export const ApplicationViews = () => {
         </main>
             <PostProvider>
             <CategoryProvider>
+            <CommentProvider>
 
                 <Route exact path="/categories">
                     <CategoryList />
@@ -26,6 +29,11 @@ export const ApplicationViews = () => {
                     <PostList />
                 </Route>
 
+                <Route exact path="/posts/:roundId(\d+)">
+                    <CommentForm />
+                </Route>
+
+            </CommentProvider>
             </CategoryProvider>
             </PostProvider>
     </>
