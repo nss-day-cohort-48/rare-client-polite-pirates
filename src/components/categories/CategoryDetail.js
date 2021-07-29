@@ -6,10 +6,12 @@ import { Link, useHistory } from "react-router-dom"
 
 export const Category = ({ category }) => (
     <section className="category">
+        
         {/* This code is not finished it is for update but needs code inside of history.push to push it to a pop up box to edit */}
-        {/* <button onClick={() => {
-            history.push()
-        }}>Edit</button> */}
+        <button onClick={() => {
+            // history.push()
+        }}>Edit</button>
+
         <h3 className="category__name">
             <Link to={`/categories/${category.id}`}>
                 {category.label}
