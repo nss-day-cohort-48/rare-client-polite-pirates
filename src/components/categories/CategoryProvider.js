@@ -25,7 +25,7 @@ export const CategoryProvider = (props) => {
             },
             body: JSON.stringify(category)
         })
-            .then(categories)
+            .then(getCategories)
     }
 
     const updateCategory = category => {
@@ -49,7 +49,7 @@ export const CategoryProvider = (props) => {
     return (
         <CategoryContext.Provider value={{
             categories, addCategory, getCategories, getCategoryById,
-            searchTerms, setTerms, releaseCategory, updateCategory
+            searchTerms, setTerms, releaseCategory, updateCategory, setCategories
         }}>
             {props.children}
         </CategoryContext.Provider>
