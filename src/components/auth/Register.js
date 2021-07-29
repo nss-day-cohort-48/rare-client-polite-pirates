@@ -1,5 +1,5 @@
 import React, { useRef } from "react"
-import { Link } from "react-router-dom"
+import { Link, useHistory } from "react-router-dom"
 import "./Auth.css"
 
 export const Register = (props) => {
@@ -11,12 +11,23 @@ export const Register = (props) => {
     const verifyPassword = useRef()
     const passwordDialog = useRef()
     const profile_image_url = useRef()
+    const history = useHistory()
 
-
-
+    // FOR WHEN WE SET UP OUR TUPLES
+    // const existingUserCheck = () => {
+    //     return fetch(`http://localhost:8088/users?email=${email.current.value}`)
+    //         .then(res => res.json())
+    //         .then(user => !!user.length)
+    // }
+    
     const handleRegister = (e) => {
         e.preventDefault()
         let timestamp = Date.now()
+
+        // LOGIC FOR WHEN WE HAVE OUR TUPLES SET
+        // existingUserCheck()
+        //     .then((userExists) => {
+        //         if (!userExists)
         
         if (password.current.value === verifyPassword.current.value) {
             const newUser = {
@@ -39,12 +50,12 @@ export const Register = (props) => {
                 },
                 body: JSON.stringify(newUser)
             })
-                .then(res => res.json())
-                .then(res => {
-                    if ("valid" in res && res.valid) {
-                        localStorage.setItem("rare_user_id", res.token)
-                        props.history.push("/")
-                    }
+            .then(res => res.json())
+            .then(createdUser => {
+                if (createdUser.hasOwnProperty("id")) {
+                    localStorage.setItem("rare_user_id", createdUser.id)
+                    history.push("/")
+                }
                 })
         } else {
             passwordDialog.current.showModal()
