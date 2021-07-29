@@ -5,6 +5,10 @@ export const PostContext = createContext();
 export const PostProvider = (props) => {
   const [posts, setPosts] = useState([]);
 
+  posts.sort((post1, post2) =>
+    post1.publication_date < post2.publication_date ? 1 : -1
+  );
+
   const getPosts = () => {
     return fetch("http://localhost:8088/posts")
       .then((res) => res.json())
