@@ -1,16 +1,17 @@
 import React, { useContext, useEffect, useRef, useState } from "react"
-import { Link, useHistory } from "react-router-dom"
+import { Link, useHistory, useParams } from "react-router-dom"
 import { CategoryContext } from "./CategoryProvider"
 
 export const CategoryForm = () => {
     // PROVIDER INFO HERE
-    const { categories, addCategory, getCategories } = useContext(CategoryContext)
+    const { categories, addCategory, getCategories, updateCategory } = useContext(CategoryContext)
     // LOOK AT ID FOR CATEGORIES
     // CONTROLLING STATE HERE
     const [category, setCategory] = useState({label: ""})
     const [isLoading, setIsLoading] = useState(true);
 
     const history = useHistory()
+    const {categoryId} = useParams();
 
 
     // CONTROL INPUT CHANGE HERE
@@ -25,6 +26,14 @@ export const CategoryForm = () => {
     const handleSaveCategory = () => {
           //disable the button - no extra clicks
           setIsLoading(true);
+          //PUT - update category
+          if (categoryId){
+            updateCategory({
+              id: category.id,
+              label: category.label
+            })
+            .then(() => history.push(`/category/detail/${category.id}`))
+          }else{
             //POST - add
           addCategory({
                 label: category.label
@@ -32,6 +41,7 @@ export const CategoryForm = () => {
             .then(() => history.push("/categories"))
             setCategory({label: ""})
           }
+        }
         
         
         // GET CATEGORY LIST 
