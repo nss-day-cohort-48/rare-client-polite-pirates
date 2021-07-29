@@ -1,4 +1,4 @@
-import React, { useRef } from "react"
+import React, { useRef, useContext } from "react"
 import { Link, useHistory } from "react-router-dom"
 import "./Auth.css"
 
@@ -6,40 +6,59 @@ import "./Auth.css"
 export const Login = () => {
     const email = useRef()
     const password = useRef()
-    const invalidDialog = useRef()
+    const existDialog = useRef()
     const history = useHistory()
+
+    const existingUserCheck = () => {
+        return fetch(`http://localhost:8088/users?email=${email.current.value}`)
+            .then(res => res.json())
+            .then(user => user.length ? user[0] : false)
+    }
 
     const handleLogin = (e) => {
         e.preventDefault()
 
-        return fetch("http://127.0.0.1:8088/login", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json"
-            },
-            body: JSON.stringify({
-                username: email.current.value,
-                password: password.current.value
-            })
-        })
-            .then(res => res.json())
-            .then(res => {
-                if ("valid" in res && res.valid) {
-                    localStorage.setItem("rare_user_id", res.token )
-                    history.push("/")
-                }
-                else {
-                    invalidDialog.current.showModal()
-                }
-            })
+        // existingUserCheck()
+        .then(exists => {
+            if (exists) {
+                localStorage.setItem("rare_user_id", exists.id)
+                history.push("/")
+
+            }else{
+                existDialog.current.showModal()
+            }
+        } )
+
     }
+        // return fetch("http://127.0.0.1:8088/login", {
+        //     method: "POST",
+        //      headers: {
+        //         "Content-Type": "application/json",
+        //         "Accept": "application/json"
+        //     },
+        //     body: JSON.stringify({
+        //         username: email.current.value,
+        //         password: password.current.value
+        //     })
+        // }
+        // )
+        //     .then(res => res.json())
+        //     .then(res => {
+        //         if ("valid" in res && res.valid) {
+        //             localStorage.setItem("rare_user_id", res.token )
+        //             history.push("/")
+        //         }
+        //         else {
+        //             invalidDialog.current.showModal()
+        //         }
+        //     })
+    
 
     return (
         <main className="container--login">
-            <dialog className="dialog dialog--auth" ref={invalidDialog}>
+            <dialog className="dialog dialog--auth" ref={existDialog}>
                 <div>Email or password was not valid.</div>
-                <button className="button--close" onClick={e => invalidDialog.current.close()}>Close</button>
+                <button className="button--close" onClick={e => existDialog.current.close()}>Close</button>
             </dialog>
             <section>
                 <form className="form--login" onSubmit={handleLogin}>
