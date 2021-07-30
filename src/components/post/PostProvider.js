@@ -9,6 +9,12 @@ export const PostProvider = (props) => {
     post1.publication_date < post2.publication_date ? 1 : -1
   );
 
+  const getMyPosts = (userId) => {
+    return fetch(`http://localhost:8088/myposts?user=${userId}`)
+      .then((res) => res.json())
+      .then(setPosts);
+  };
+
   const getPosts = () => {
     return fetch("http://localhost:8088/posts")
       .then((res) => res.json())
@@ -27,6 +33,7 @@ export const PostProvider = (props) => {
         posts,
         getPosts,
         getPostById,
+        getMyPosts,
       }}
     >
       {props.children}
