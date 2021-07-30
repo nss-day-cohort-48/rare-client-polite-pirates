@@ -5,6 +5,7 @@ import { CategoryProvider } from "./categories/CategoryProvider";
 import { CategoryForm } from "./categories/CategoryForm";
 import { PostList } from "./post/PostList";
 import { PostProvider } from "./post/PostProvider";
+import { MyPostsList } from "./post/MyPostsList";
 
 export const ApplicationViews = () => {
   return (
@@ -20,17 +21,20 @@ export const ApplicationViews = () => {
           <Route exact path="/categories">
             <CategoryList />
           </Route>
-                <Route exact path="/categories">
-                    <CategoryList />
-                    <CategoryForm/>
-                </Route>
+          <Route exact path="/categories">
+            <CategoryList />
+            <CategoryForm />
+          </Route>
 
-                <Route exact path="/posts">
-                    <PostList />
-                </Route>
+          <Route exact path="/posts">
+            <PostList />
+          </Route>
 
-            </CategoryProvider>
-         </PostProvider>
+          <Route exact path="/myposts">
+            <MyPostsList />
+          </Route>
+        </CategoryProvider>
+      </PostProvider>
     </>
   );
 };
