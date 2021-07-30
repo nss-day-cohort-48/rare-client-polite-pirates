@@ -34,7 +34,7 @@ export const ApplicationViews = () => {
                     <PostList />
                 </Route>
 
-                <Route exact path="/posts/:roundId(\d+)">
+                <Route exact path="/posts/:postId(\d+)">
                     <CommentForm />
                 </Route>
 
