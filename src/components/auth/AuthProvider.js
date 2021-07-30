@@ -1,12 +1,12 @@
-import React, { useState } from "react"
+import React, { useState, createContext } from "react"
 
-export const ProfileContext = React.createContext()
+export const ProfileContext = createContext()
 
 export const ProfileProvider = (props) => {
     const [profile, setProfile] = useState({events:[]})
 
     const getProfile = () => {
-        return fetch("http://localhost:8000/profile", {
+        return fetch("http://localhost:8000/post", {
             headers: {
                 "Authorization": `Token ${localStorage.getItem("lu_token")}`
             }
