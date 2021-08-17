@@ -10,19 +10,31 @@ export const PostProvider = (props) => {
   );
 
   const getMyPosts = (userId) => {
-    return fetch(`http://localhost:8088/myposts?user=${userId}`)
+    return fetch(`http://localhost:8000/myposts?user=${userId}`, {
+      headers: {
+        "Authorization": `Token ${localStorage.getItem("rare_user_id")}`
+    }
+    })
       .then((res) => res.json())
       .then(setPosts);
   };
 
   const getPosts = () => {
-    return fetch("http://localhost:8088/posts")
+    return fetch("http://localhost:8000/posts", {
+      headers: {
+        "Authorization": `Token ${localStorage.getItem("rare_user_id")}`
+    }
+    })
       .then((res) => res.json())
       .then(setPosts);
   };
 
   const getPostById = (postId) => {
-    return fetch(`http://localhost:8088/posts/${postId}`).then((res) =>
+    return fetch(`http://localhost:8000/posts/${postId}`, {
+      headers: {
+        "Authorization": `Token ${localStorage.getItem("rare_user_id")}`
+    }
+    }).then((res) =>
       res.json()
     );
   };
