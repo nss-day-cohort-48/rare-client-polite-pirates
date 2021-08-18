@@ -6,7 +6,12 @@ export const CommentProvider = (props) => {
     const [comments, setComments] = useState([]);
 
     const getComments = () => {
-        return fetch("http://localhost:8088/comments")
+        return fetch("http://localhost:8088/comments", {
+            headers:{
+                "Authorization": `Token ${localStorage.getItem("lu_token")}`,
+                "Content-type": "apllication/json"
+            }
+        })
             .then((res) => res.json())
             .then(setComments);
     };
@@ -21,11 +26,24 @@ export const CommentProvider = (props) => {
         return fetch("http://localhost:8088/comments", {
             method: "POST",
             headers: {
+                "Authorization": `Token ${localStorage.getItem("lu_token")}`,
                 "Content-Type": "application/json"
             },
             body: JSON.stringify(comment)
         })
+            .then(response => response.json())
             .then(getComments)
+    }
+
+    const deleteComment = comment => {
+        return fetch(`http://localhost:8088/comments/${comment}`, {
+            method: "DELETE",
+            headers: {
+                "Authorization": `Token ${localStorage.getItem("lu_token")}`,
+                "Content-Type": "application/json"
+            }
+        })
+        .then(getComments)
     }
 
     const updateComment = comment => {
@@ -46,7 +64,8 @@ export const CommentProvider = (props) => {
                 getComments,
                 getCommentById,
                 addComment,
-                updateComment
+                updateComment,
+                deleteComment
             }}
         >
             {props.children}
