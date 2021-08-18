@@ -15,7 +15,7 @@ export const Category = ({ category }) => {
       <button
         className="btn btn-2"
         onClick={() => {
-          history.push("/categories/new");
+          history.push(`/categories/${category.id}/edit`);
         }}
       >
         Edit

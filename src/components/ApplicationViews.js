@@ -30,6 +30,10 @@ export const ApplicationViews = () => {
               <CategoryForm />
             </Route>
 
+            <Route exact path="/categories/:categoryId(\d+)/edit">
+              <CategoryForm />
+            </Route>
+
             <Route exact path="/posts">
               <PostList />
             </Route>
