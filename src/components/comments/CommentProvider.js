@@ -6,7 +6,7 @@ export const CommentProvider = (props) => {
     const [comments, setComments] = useState([]);
 
     const getComments = () => {
-        return fetch("http://localhost:8088/comments", {
+        return fetch("http://localhost:8000/comments", {
             headers:{
                 "Authorization": `Token ${localStorage.getItem("lu_token")}`,
                 "Content-type": "apllication/json"
@@ -17,13 +17,13 @@ export const CommentProvider = (props) => {
     };
 
     const getCommentById = (commentId) => {
-        return fetch(`http://localhost:8088/comments/${commentId}`).then((res) =>
+        return fetch(`http://localhost:8000/comments/${commentId}`).then((res) =>
             res.json()
         );
     };
 
-    const addComment = comment => {
-        return fetch("http://localhost:8088/comments", {
+    const addComment = (comment) => {
+        return fetch("http://localhost:8000/comments", {
             method: "POST",
             headers: {
                 "Authorization": `Token ${localStorage.getItem("lu_token")}`,
@@ -36,7 +36,7 @@ export const CommentProvider = (props) => {
     }
 
     const deleteComment = comment => {
-        return fetch(`http://localhost:8088/comments/${comment}`, {
+        return fetch(`http://localhost:8000/comments/${comment}`, {
             method: "DELETE",
             headers: {
                 "Authorization": `Token ${localStorage.getItem("lu_token")}`,
@@ -47,7 +47,7 @@ export const CommentProvider = (props) => {
     }
 
     const updateComment = comment => {
-        return fetch(`http://localhost:8088/comments/${comment.id}`, {
+        return fetch(`http://localhost:8000/comments/${comment.id}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json"

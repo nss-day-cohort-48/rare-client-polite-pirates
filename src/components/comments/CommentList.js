@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from "react"
 import { CommentContext } from "./CommentProvider.js"
 import { useHistory } from "react-router-dom"
-// import "./CommentList.css"git 
+import "./CommentList.css"
 
 export const CommentList =(props) => {
     const history = useHistory()
