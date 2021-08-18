@@ -7,18 +7,22 @@ export const CategoryProvider = (props) => {
     const [searchTerms, setTerms] = useState("")
 
     const getCategories = () => {
-        return fetch("http://localhost:8088/categories")
+        return fetch("http://localhost:8000/categories", {
+            headers: {
+              "Authorization": `Token ${localStorage.getItem("rare_user_id")}`
+          }
+          })
             .then(res => res.json())
             .then(setCategories)
     }
 
     const getCategoryById = (id) => {
-        return fetch(`http://localhost:8088/categories/${id}`)
+        return fetch(`http://localhost:8000/categories/${id}`)
             .then(res => res.json())
     }
 
     const addCategory = category => {
-        return fetch("http://localhost:8088/categories", {
+        return fetch("http://localhost:8000/categories", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -29,7 +33,7 @@ export const CategoryProvider = (props) => {
     }
 
     const updateCategory = category => {
-        return fetch(`http://localhost:8088/categories/${category.id}`, {
+        return fetch(`http://localhost:8000/categories/${category.id}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json"
@@ -40,7 +44,7 @@ export const CategoryProvider = (props) => {
     }
 
     const releaseCategory = (categoryId) => {
-        return fetch(`http://localhost:8088/categories/${categoryId}`, {
+        return fetch(`http://localhost:8000/categories/${categoryId}`, {
             method: "DELETE"
         })
             .then(getCategories)
