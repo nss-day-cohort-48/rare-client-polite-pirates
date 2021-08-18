@@ -21,20 +21,12 @@ export const ApplicationViews = () => {
 
       <PostProvider>
         <CategoryProvider>
-          <Route exact path="/categories">
-            <CategoryList />
-          </Route>
-          <Route exact path="/categories">
-            <CategoryList />
-            <CategoryForm />
-          </Route>
           <CommentProvider>
             <Route exact path="/categories">
               <CategoryList />
             </Route>
 
-            <Route exact path="/categories">
-              <CategoryList />
+            <Route exact path="/categories/new">
               <CategoryForm />
             </Route>
 
