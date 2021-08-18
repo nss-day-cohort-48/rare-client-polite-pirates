@@ -1,25 +1,26 @@
-import React, { useState, useContext, useEffect } from "react"
-import { CategoryContext } from "./CategoryProvider"
-import { Category } from "./CategoryDetail"
-import "./Category.css"
+import React, { useState, useContext, useEffect } from "react";
+import { CategoryContext } from "./CategoryProvider";
+import { Category } from "./CategoryDetail";
+import "./Category.css";
 
 export const CategoryList = ({ history }) => {
-    const { getCategories, categories, searchTerms } = useContext(CategoryContext)
+  const { getAllCategories, categories, searchTerms } = useContext(
+    CategoryContext
+  );
 
-    const [filteredCategories, setFiltered] = useState([])
+  const [filteredCategories, setFiltered] = useState([]);
 
+  useEffect(() => {
+    getAllCategories();
+  }, []);
 
-    useEffect(() => {
-        getCategories()
-    }, [])
-
-    return (
-        <div style={{ marginTop: "2rem" }}>
-            <div className="Categories">
-                {
-                    categories.map(category => <Category key={category.id} category={category} />)
-                }
-            </div>
-        </div>
-    )
-}
+  return (
+    <div style={{ marginTop: "2rem" }}>
+      <div className="Categories">
+        {categories.map((category) => (
+          <Category key={category.id} category={category} />
+        ))}
+      </div>
+    </div>
+  );
+};
