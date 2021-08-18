@@ -1,50 +1,45 @@
-import React, { useState } from "react";
+import React, { useState, createContext } from "react";
 
-export const CategoryContext = React.createContext();
+export const CategoryContext = createContext();
 
 export const CategoryProvider = (props) => {
   const [categories, setCategories] = useState([]);
-  const [searchTerms, setTerms] = useState("");
 
   const getAllCategories = () => {
     return fetch("http://localhost:8000/categories", {
-      header: {
+      headers: {
         Authorization: `Token ${localStorage.getItem("rare_user_id")}`,
       },
     })
       .then((res) => res.json())
-      .then(setCategories);
+      .then((data) => setCategories(data));
   };
 
-  const getCategoryById = (id) => {
-    return fetch(`http://localhost:8000/categories/${id}`).then((res) =>
-      res.json()
-    );
+  const getCategoryById = (categoryId) => {
+    return fetch(`http://localhost:8000/categories/${categoryId}`, {
+      headers: {
+        Authorization: `Token ${localStorage.getItem("rare_user_id")}`,
+      },
+    }).then((res) => res.json());
   };
 
-  const addCategory = (category) => {
-    return fetch("http://localhost:8000/categories", {
+  const createCategory = (category) => {
+    return fetch(`http://localhost:8000/categories`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Token ${localStorage.getItem("rare_user_id")}`,
       },
       body: JSON.stringify(category),
     }).then(getAllCategories);
   };
 
-  const updateCategory = (category) => {
-    return fetch(`http://localhost:8000/categories/${category.id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(category),
-    }).then(getAllCategories);
-  };
-
-  const releaseCategory = (categoryId) => {
+  const deleteCategory = (categoryId) => {
     return fetch(`http://localhost:8000/categories/${categoryId}`, {
       method: "DELETE",
+      headers: {
+        Authorization: `Token ${localStorage.getItem("rare_user_id")}`,
+      },
     }).then(getAllCategories);
   };
 
@@ -52,14 +47,10 @@ export const CategoryProvider = (props) => {
     <CategoryContext.Provider
       value={{
         categories,
-        addCategory,
         getAllCategories,
         getCategoryById,
-        searchTerms,
-        setTerms,
-        releaseCategory,
-        updateCategory,
-        setCategories,
+        createCategory,
+        deleteCategory,
       }}
     >
       {props.children}
