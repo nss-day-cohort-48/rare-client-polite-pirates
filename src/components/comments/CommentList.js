@@ -15,11 +15,9 @@ export const CommentList =(props) => {
         <article className="comments">
             <header className="comments__header">
 
-              <h1>My Comment</h1>
+              <h1>Comments</h1>
 
-              <button className="btn btn-2 btn-sep icon create" onClick={() => {
-                  history.push ({ pathname: "/comments/new"})
-              }}>New Comment</button>  
+              
             </header>
             {
                 comments.map(comment => {
