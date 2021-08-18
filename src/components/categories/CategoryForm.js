@@ -6,12 +6,11 @@ export const CategoryForm = () => {
   // PROVIDER INFO HERE
   const {
     categories,
-    addCategory,
+    createCategory,
     getAllCategories,
     updateCategory,
   } = useContext(CategoryContext);
-  // LOOK AT ID FOR CATEGORIES
-  // CONTROLLING STATE HERE
+
   const [category, setCategory] = useState({ label: "" });
   const [isLoading, setIsLoading] = useState(true);
 
@@ -38,7 +37,7 @@ export const CategoryForm = () => {
       }).then(() => history.push(`/category/detail/${category.id}`));
     } else {
       //POST - add
-      addCategory({
+      createCategory({
         label: category.label,
       }).then(() => history.push("/categories"));
       setCategory({ label: "" });
@@ -53,7 +52,7 @@ export const CategoryForm = () => {
 
   return (
     <form className="category_form">
-      <h2 className="category_form__title">Create a new category</h2>
+      <h2 className="category_form__title">Create Category</h2>
       <fieldset>
         <div className="form-group">
           <input
