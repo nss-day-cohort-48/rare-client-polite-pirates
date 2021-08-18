@@ -28,7 +28,7 @@ export const CommentList =(props) => {
                         <div className="registration__comment_author">{comment.author}</div>
                         <div>
                             Time: {
-                                new Date(comment.date).toLocaleDateString("en-US",
+                                new Date(comment.created_on).toLocaleDateString("en-US",
                                 {
                                     weekday: 'long',
                                     year: 'numeric',
@@ -36,7 +36,7 @@ export const CommentList =(props) => {
                                     day: 'numeric'
                                 })
                             }
-                            @ {comment.time}
+                            @ {comment.created_on}
                         </div>
                     </section>
                 })
