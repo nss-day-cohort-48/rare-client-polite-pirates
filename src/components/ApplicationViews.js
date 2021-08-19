@@ -10,6 +10,7 @@ import { PostProvider } from "./post/PostProvider";
 import { MyPostsList } from "./post/MyPostsList";
 import { TagList } from "./tags/TagList";
 import { TagProvider } from "./tags/TagProvider";
+import { TagForm } from "./tags/TagForm";
 
 export const ApplicationViews = () => {
   return (
@@ -37,11 +38,17 @@ export const ApplicationViews = () => {
               <Route exact path="/posts">
                 <PostList />
               </Route>
+
               <Route exact path="/myposts">
                 <MyPostsList />
               </Route>
+
               <Route exact path="/tags">
                 <TagList />
+              </Route>
+              
+              <Route exact path="/tags/create">
+                <TagForm />
               </Route>
 
               <Route exact path="/posts/:postId(\d+)">
