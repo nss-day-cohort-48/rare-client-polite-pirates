@@ -4,14 +4,14 @@ import { Category } from "./CategoryDetail";
 import "./Category.css";
 
 export const CategoryList = ({ history }) => {
-  const { getAllCategories, categories, searchTerms } = useContext(
+  const { getCategories, categories, searchTerms } = useContext(
     CategoryContext
   );
 
   const [filteredCategories, setFiltered] = useState([]);
 
   useEffect(() => {
-    getAllCategories();
+    getCategories();
   }, []);
 
   return (

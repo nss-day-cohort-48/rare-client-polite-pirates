@@ -6,7 +6,7 @@ export const TagForm = () => {
     // PROVIDER INFO HERE
     const {
         tags,
-        addTag,
+        createTag,
         getAllTags,
         updateTag,
     } = useContext(TagContext);
@@ -37,8 +37,8 @@ export const TagForm = () => {
                 label: tag.label,
             }).then(() => history.push(`/tag/detail/${tag.id}`));
         } else {
-            //POST - add
-            addTag({
+            //POST - create
+            createTag({
                 label: tag.label,
             }).then(() => history.push("/tags"));
             setTag({ label: "" });
