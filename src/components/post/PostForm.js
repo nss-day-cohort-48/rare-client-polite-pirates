@@ -10,8 +10,7 @@ export const PostForm = () => {
     const { posts, createPost, getPosts } = useContext(PostContext)
     const { getCategories, categories } = useContext(CategoryContext)
 
-    const [post, setPost] = useState({})
-
+    
     /*
         Since the input fields are bound to the values of
         the properties of this state variable, you need to
@@ -106,7 +105,7 @@ export const PostForm = () => {
                         let timestamp = Date.now()
                         const post = {
                             title: currentPost.title,
-                            category: parseInt(currentPost.category),
+                            category: parseInt(currentPost?.category),
                             publication_date: timestamp,
                             image_url: currentPost.image_url,
                             content: currentPost.content,
@@ -115,9 +114,10 @@ export const PostForm = () => {
     
                         // Send POST request to your API
                         createPost(post)
-                            .then(() => history.push("/posts"))
+                            .then(() => history.push(`/posts`))
                     }}
                     >Create</button>
             
         </form>
 )}
+
