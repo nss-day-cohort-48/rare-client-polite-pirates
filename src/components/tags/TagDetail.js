@@ -10,7 +10,7 @@ export const Tag = ({ tag }) => {
     const handleDelete = () => {
         deleteTag(tag.id)
             .then(() => {
-                history.push("/")
+                history.push("/tags")
             })
     }
 
