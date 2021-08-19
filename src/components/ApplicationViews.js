@@ -30,9 +30,18 @@ export const ApplicationViews = () => {
           <CommentProvider>
             <TagProvider>
 
+            <Route exact path="/categories/create">
+              <CategoryForm />
+            </Route>
+
+            <Route exact path="/categories/:categoryId(\d+)/edit">
+              <CategoryForm />
+            </Route>
+
               <Route exact path="/categories">
                 <CategoryList />
               </Route>
+
 
               <Route exact path="/categories/new">
                 <CategoryForm />
