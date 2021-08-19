@@ -14,6 +14,7 @@ import { PostDetail } from "./post/PostDetail";
 import { PostContent } from "./post/PostContent";
 import { TagList } from "./tags/TagList";
 import { TagProvider } from "./tags/TagProvider";
+import { TagForm } from "./tags/TagForm";
 
 
 export const ApplicationViews = () => {
@@ -31,6 +32,14 @@ export const ApplicationViews = () => {
           <CommentProvider>
             <TagProvider>
 
+            <Route exact path="/categories/create">
+              <CategoryForm />
+            </Route>
+
+            <Route exact path="/categories/:categoryId(\d+)/edit">
+              <CategoryForm />
+            </Route>
+
               <Route exact path="/categories">
                 <CategoryList />
               </Route>
@@ -44,19 +53,30 @@ export const ApplicationViews = () => {
               <CommentList />
             </Route>
 
+
               <Route exact path="/categories/new">
                 <CategoryForm />
               </Route>
 
               <Route exact path="/posts">
-              <PostForm/>
-              <PostList />
-            </Route>
+                <PostForm/>
+                <PostList />
+              </Route>
+              
               <Route exact path="/myposts">
                 <MyPostsList />
               </Route>
+
               <Route exact path="/tags">
                 <TagList />
+              </Route>
+              
+              <Route exact path="/tags/create">
+                <TagForm />
+              </Route>
+
+              <Route exact path="/tags/edit/:tagId(\d+)">
+                <TagForm />
               </Route>
               
             </TagProvider>

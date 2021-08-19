@@ -6,54 +6,40 @@ export const CategoryForm = () => {
   // PROVIDER INFO HERE
   const {
     categories,
-    addCategory,
-    getAllCategories,
+    createCategory,
+    getCategories,
     updateCategory,
+    getCategoryById,
   } = useContext(CategoryContext);
-  // LOOK AT ID FOR CATEGORIES
-  // CONTROLLING STATE HERE
-  const [category, setCategory] = useState({ label: "" });
-  const [isLoading, setIsLoading] = useState(true);
 
-  const history = useHistory();
   const { categoryId } = useParams();
+  const history = useHistory();
 
-  // CONTROL INPUT CHANGE HERE
-  const handleControlledInputChange = (event) => {
-    const newCategory = { ...categories };
-    newCategory[event.target.name] = event.target.value;
-    //update state
-    setCategory(newCategory);
-  };
+  const [currentCategory, setCurrentCategory] = useState({ label: "" });
 
-  // SAVE FUNCTION HERE
-  const handleSaveCategory = () => {
-    //disable the button - no extra clicks
-    setIsLoading(true);
-    //PUT - update category
-    if (categoryId) {
-      updateCategory({
-        id: category.id,
-        label: category.label,
-      }).then(() => history.push(`/category/detail/${category.id}`));
-    } else {
-      //POST - add
-      addCategory({
-        label: category.label,
-      }).then(() => history.push("/categories"));
-      setCategory({ label: "" });
-    }
-  };
-
-  // GET CATEGORY LIST
   useEffect(() => {
-    getAllCategories();
-    setIsLoading(false);
+    getCategories();
   }, []);
+
+  useEffect(() => {
+    if (categoryId) {
+      getCategoryById(categoryId).then((category) =>
+        setCurrentCategory({
+          label: category.label,
+        })
+      );
+    }
+  }, [categoryId]);
+
+  const changeCategoryState = (category) => {
+    const newCategoryState = { ...currentCategory };
+    newCategoryState[category.target.name] = category.target.value;
+    setCurrentCategory(newCategoryState);
+  };
 
   return (
     <form className="category_form">
-      <h2 className="category_form__title">Create a new category</h2>
+      <h2 className="category_form__title">Create Category</h2>
       <fieldset>
         <div className="form-group">
           <input
@@ -64,21 +50,42 @@ export const CategoryForm = () => {
             autoFocus
             className="form-control"
             placeholder="add text"
-            onChange={handleControlledInputChange}
-            value={category.label}
+            value={currentCategory.label}
+            onChange={changeCategoryState}
           />
         </div>
       </fieldset>
-      <button
-        className="btn btn-primary"
-        disabled={isLoading}
-        onClick={(event) => {
-          handleSaveCategory();
-          event.preventDefault(); // Prevent browser from submitting the form and refreshing the page
-        }}
-      >
-        Create
-      </button>
+
+      {categoryId ? (
+        <button
+          type="submit"
+          onClick={(evt) => {
+            evt.preventDefault();
+            updateCategory({
+              id: categoryId,
+              label: currentCategory.label,
+            }).then(() => history.push("/categories"));
+          }}
+          className="btn btn-primary"
+        >
+          Edit
+        </button>
+      ) : (
+        <button
+          type="submit"
+          onClick={(evt) => {
+            evt.preventDefault();
+
+            const category = {
+              label: currentCategory.label,
+            };
+            createCategory(category).then(() => history.push("/categories"));
+          }}
+          className="btn btn-primary"
+        >
+          Create
+        </button>
+      )}
     </form>
   );
 };
