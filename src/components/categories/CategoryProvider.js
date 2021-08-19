@@ -3,57 +3,61 @@ import React, { useState, createContext } from "react";
 export const CategoryContext = createContext();
 
 export const CategoryProvider = (props) => {
-  const [categories, setCategories] = useState([]);
 
-  const getAllCategories = () => {
-    return fetch("http://localhost:8000/categories", {
-      headers: {
-        Authorization: `Token ${localStorage.getItem("rare_user_id")}`,
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => setCategories(data));
-  };
+    const [categories, setCategories] = useState([])
+    const [searchTerms, setTerms] = useState("")
 
-  const getCategoryById = (categoryId) => {
-    return fetch(`http://localhost:8000/categories/${categoryId}`, {
-      headers: {
-        Authorization: `Token ${localStorage.getItem("rare_user_id")}`,
-      },
-    }).then((res) => res.json());
-  };
+    const getCategories = () => {
+        return fetch("http://localhost:8000/categories", {
+            headers: {
+              "Authorization": `Token ${localStorage.getItem("rare_user_id")}`
+          }
+          })
+            .then(res => res.json())
+            .then(setCategories)
+    }
 
-  const createCategory = (category) => {
-    return fetch(`http://localhost:8000/categories`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Token ${localStorage.getItem("rare_user_id")}`,
-      },
-      body: JSON.stringify(category),
-    }).then(getAllCategories);
-  };
+    const getCategoryById = (id) => {
+        return fetch(`http://localhost:8000/categories/${id}`)
+            .then(res => res.json())
+    }
 
-  const deleteCategory = (categoryId) => {
-    return fetch(`http://localhost:8000/categories/${categoryId}`, {
-      method: "DELETE",
-      headers: {
-        Authorization: `Token ${localStorage.getItem("rare_user_id")}`,
-      },
-    }).then(getAllCategories);
-  };
+    const addCategory = category => {
+        return fetch("http://localhost:8000/categories", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(category)
+        })
+            .then(getCategories)
+    }
 
-  return (
-    <CategoryContext.Provider
-      value={{
-        categories,
-        getAllCategories,
-        getCategoryById,
-        createCategory,
-        deleteCategory,
-      }}
-    >
-      {props.children}
-    </CategoryContext.Provider>
-  );
-};
+    const updateCategory = category => {
+        return fetch(`http://localhost:8000/categories/${category.id}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(category)
+        })
+            .then(getCategories)
+    }
+
+    const releaseCategory = (categoryId) => {
+        return fetch(`http://localhost:8000/categories/${categoryId}`, {
+            method: "DELETE"
+        })
+            .then(getCategories)
+    }
+
+    return (
+        <CategoryContext.Provider value={{
+            categories, addCategory, getCategories, getCategoryById,
+            searchTerms, setTerms, releaseCategory, updateCategory, setCategories
+        }}>
+            {props.children}
+        </CategoryContext.Provider>
+    )
+}
+
