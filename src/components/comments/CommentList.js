@@ -1,14 +1,17 @@
 import React, { useContext, useEffect } from "react"
 import { CommentContext } from "./CommentProvider.js"
+import { PostContext } from "../post/PostProvider.js"
 import { useHistory } from "react-router-dom"
 import "./CommentList.css"
 
 export const CommentList =(props) => {
     const history = useHistory()
     const { comments, getComments } = useContext(CommentContext)
+    const { posts, getPosts } = useContext(PostContext)
 
     useEffect(() => {
         getComments()
+        getPosts()
     }, [])
 
     return (
@@ -35,6 +38,7 @@ export const CommentList =(props) => {
                                 })
                             }
                             @ {comment.created_on}
+                            
                         </div>
                     </section>
                 })
