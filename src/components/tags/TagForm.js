@@ -33,9 +33,9 @@ export const TagForm = () => {
         //PUT - update tag
         if (tagId) {
             updateTag({
-                id: tag.id,
+                id: tagId,
                 label: tag.label,
-            }).then(() => history.push(`/tag/detail/${tag.id}`));
+            }).then(() => history.push(`/tags`));
         } else {
             //POST - create
             createTag({
@@ -53,7 +53,7 @@ export const TagForm = () => {
 
     return (
         <form className="tag_form">
-            <h2 className="tag_form__title">Create a new tag</h2>
+            <h2 className="tag_form__title">{tagId ? "Edit Tag" : "Create Tag"}</h2>
             <fieldset>
                 <div className="form-group">
                     <input
@@ -77,7 +77,7 @@ export const TagForm = () => {
                     event.preventDefault(); // Prevent browser from submitting the form and refreshing the page
                 }}
             >
-                Create
+                {tagId ? "Edit Tag" : "Create Tag"}
             </button>
         </form>
     );
