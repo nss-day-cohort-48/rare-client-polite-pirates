@@ -1,8 +1,9 @@
-import React, { useState } from "react"
+import React, { useState, createContext } from "react";
 
-export const CategoryContext = React.createContext()
+export const CategoryContext = createContext();
 
 export const CategoryProvider = (props) => {
+
     const [categories, setCategories] = useState([])
     const [searchTerms, setTerms] = useState("")
 
@@ -59,3 +60,4 @@ export const CategoryProvider = (props) => {
         </CategoryContext.Provider>
     )
 }
+
