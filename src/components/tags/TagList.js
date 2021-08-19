@@ -15,7 +15,7 @@ export const TagList = () => {
     return (
         <div style={{ marginTop: "2rem" }}>
             <div className="addTagButton">
-                <button onClick={() => { history.push("/tags/create") }}>Add Tag</button>
+                <button onClick={() => { history.push("/tags/create") }}>Create Tag</button>
             </div>
             <div className="Tags">
                 {tags.map((tag) => (
