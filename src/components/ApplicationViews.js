@@ -9,6 +9,9 @@ import { PostList } from "./post/PostList";
 import { PostProvider } from "./post/PostProvider";
 import { MyPostsList } from "./post/MyPostsList";
 import { CommentList } from "./comments/CommentList";
+import { PostForm } from "./post/PostForm";
+import { PostDetail } from "./post/PostDetail";
+import { PostContent } from "./post/PostContent";
 import { TagList } from "./tags/TagList";
 import { TagProvider } from "./tags/TagProvider";
 
@@ -31,11 +34,6 @@ export const ApplicationViews = () => {
               <Route exact path="/categories">
                 <CategoryList />
               </Route>
-
-
-            <Route exact path="/posts">
-              <PostList />
-            </Route>
             <Route exact path="/myposts">
               <MyPostsList />
             </Route>
@@ -50,8 +48,9 @@ export const ApplicationViews = () => {
               </Route>
 
               <Route exact path="/posts">
-                <PostList />
-              </Route>
+              <PostForm/>
+              <PostList />
+            </Route>
               <Route exact path="/myposts">
                 <MyPostsList />
               </Route>
@@ -60,8 +59,9 @@ export const ApplicationViews = () => {
               </Route>
 
               <Route exact path="/posts/:postId(\d+)">
-                <CommentForm />
-              </Route>
+              <PostContent/>
+              
+            </Route>
               
             </TagProvider>
           </CommentProvider>

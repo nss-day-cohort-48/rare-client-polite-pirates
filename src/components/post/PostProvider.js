@@ -34,10 +34,20 @@ export const PostProvider = (props) => {
       headers: {
         "Authorization": `Token ${localStorage.getItem("rare_user_id")}`
     }
-    }).then((res) =>
-      res.json()
-    );
+    }).then((res) => res.json());
   };
+
+  const createPost = (post) => {
+    return fetch("http://localhost:8000/posts", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Token ${localStorage.getItem("rare_user_id")}`
+        },
+        body: JSON.stringify(post)
+     })
+        .then(getPosts)
+}
 
   return (
     <PostContext.Provider
@@ -46,6 +56,7 @@ export const PostProvider = (props) => {
         getPosts,
         getPostById,
         getMyPosts,
+        createPost
       }}
     >
       {props.children}
