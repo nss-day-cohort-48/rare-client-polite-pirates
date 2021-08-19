@@ -27,9 +27,9 @@ export const CommentList =(props) => {
                     return <section key={`comment--${comment.id}`} className="registration">
                         <div className="registration__comment_content">{comment.content}</div>
                         
-                        <div className="registration__comment_content">Written by: {comment.author?.user?.first_name} {comment.author?.user?.last_name}</div>
+                        <div className="registration__comment_content comment__small_text">Written by: {comment.author?.user?.first_name} {comment.author?.user?.last_name}</div>
 
-                        <div>
+                        <div className="comment__small_text">
                             Time: {
                                 new Date(comment.created_on).toLocaleDateString("en-US",
                                 {

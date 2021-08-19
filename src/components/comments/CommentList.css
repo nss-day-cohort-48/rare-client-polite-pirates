@@ -1,9 +1,14 @@
 .comments {
     border: solid black;
-    padding: 1rem
+    padding: 1rem;
+    color: black
 }
 .registration {
     border: solid blue;
     margin-top: 2rem;
     padding: 1rem
+}
+.comment__small_text {
+    font-size: xx-small;
+    color: grey
 }
