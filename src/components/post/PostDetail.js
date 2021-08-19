@@ -6,7 +6,7 @@ export const PostDetail = ({ post }) => {
 
   return (
     <section className="post">
-      <h3 className="post__title">{post.title}</h3>
+      <h3 className="post__title"><Link to={`/posts/${post.id}`}>{post.title}</Link></h3>
       <div className="post__author">
         Author: {post.rare_user.user.first_name} {post.rare_user.user.last_name}
       </div>
