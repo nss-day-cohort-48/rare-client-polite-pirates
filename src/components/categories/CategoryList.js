@@ -5,13 +5,7 @@ import { CategoryContext } from "./CategoryProvider";
 import { Category } from "./CategoryDetail";
 import "./Category.css";
 
-export const CategoryList = ({ history }) => {
-  const { getCategories, categories, searchTerms } = useContext(
-    CategoryContext
-  );
 
-  const [filteredCategories, setFiltered] = useState([]);
-  
 export const CategoryList = () => {
   const { getCategories, categories } = useContext(CategoryContext);
   const history = useHistory();
