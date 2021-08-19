@@ -9,7 +9,7 @@ export const CommentProvider = (props) => {
         return fetch("http://localhost:8000/comments", {
             headers:{
                 "Authorization": `Token ${localStorage.getItem("rare_user_id")}`,
-                "Content-type": "apllication/json"
+                "Content-type": "application/json"
             }
         })
             .then((res) => res.json())

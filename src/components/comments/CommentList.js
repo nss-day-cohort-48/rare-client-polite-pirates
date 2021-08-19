@@ -1,17 +1,17 @@
 import React, { useContext, useEffect } from "react"
 import { CommentContext } from "./CommentProvider.js"
-import { PostContext } from "../post/PostProvider.js"
+// import { PostContext } from "../post/PostProvider.js"
 import { useHistory } from "react-router-dom"
 import "./CommentList.css"
 
 export const CommentList =(props) => {
     const history = useHistory()
     const { comments, getComments } = useContext(CommentContext)
-    const { posts, getPosts } = useContext(PostContext)
+    // const { posts, getPosts } = useContext(PostContext)
 
     useEffect(() => {
         getComments()
-        getPosts()
+        // getPosts()
     }, [])
 
     return (
@@ -24,9 +24,11 @@ export const CommentList =(props) => {
             </header>
             {
                 comments.map(comment => {
-                    return <section key={comment.id} className="registration">
+                    return <section key={`comment--${comment.id}`} className="registration">
                         <div className="registration__comment_content">{comment.content}</div>
-                        <div className="registration__comment_author">{comment.author}</div>
+                        
+                        <div className="registration__comment_content">Written by: {comment.author?.user?.first_name} {comment.author?.user?.last_name}</div>
+
                         <div>
                             Time: {
                                 new Date(comment.created_on).toLocaleDateString("en-US",
