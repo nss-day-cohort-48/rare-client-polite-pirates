@@ -3,7 +3,7 @@ import { PostContext } from "./PostProvider";
 import { PostDetail } from "./PostDetail";
 
 export const PostList = () => {
-  const { posts, getPosts } = useContext(PostContext);
+  const { posts, getPosts, } = useContext(PostContext);
 
   useEffect(() => {
     getPosts();
@@ -13,7 +13,8 @@ export const PostList = () => {
     <section className="posts">
       {posts.map((post) => {
         return <PostDetail key={post.id} post={post} />;
-      })}
+      
+    })}
     </section>
   );
 };
