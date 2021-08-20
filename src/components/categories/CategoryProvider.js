@@ -5,7 +5,7 @@ export const CategoryContext = createContext();
 export const CategoryProvider = (props) => {
   const [categories, setCategories] = useState([]);
 
-  const getAllCategories = () => {
+  const getCategories = () => {
     return fetch("http://localhost:8000/categories", {
       headers: {
         Authorization: `Token ${localStorage.getItem("rare_user_id")}`,
@@ -31,7 +31,7 @@ export const CategoryProvider = (props) => {
         Authorization: `Token ${localStorage.getItem("rare_user_id")}`,
       },
       body: JSON.stringify(category),
-    }).then(getAllCategories);
+    }).then(getCategories);
   };
 
   const deleteCategory = (categoryId) => {
@@ -40,7 +40,7 @@ export const CategoryProvider = (props) => {
       headers: {
         Authorization: `Token ${localStorage.getItem("rare_user_id")}`,
       },
-    }).then(getAllCategories);
+    }).then(getCategories);
   };
 
   const updateCategory = (category) => {
@@ -51,14 +51,14 @@ export const CategoryProvider = (props) => {
         Authorization: `Token ${localStorage.getItem("rare_user_id")}`,
       },
       body: JSON.stringify(category),
-    }).then(getAllCategories(category));
+    }).then(getCategories(category));
   };
 
   return (
     <CategoryContext.Provider
       value={{
         categories,
-        getAllCategories,
+        getCategories,
         getCategoryById,
         createCategory,
         deleteCategory,
