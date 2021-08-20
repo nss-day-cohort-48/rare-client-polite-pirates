@@ -8,11 +8,13 @@ import { CommentForm } from "./comments/CommentForm";
 import { PostList } from "./post/PostList";
 import { PostProvider } from "./post/PostProvider";
 import { MyPostsList } from "./post/MyPostsList";
+import { CommentList } from "./comments/CommentList";
 import { PostForm } from "./post/PostForm";
 import { PostDetail } from "./post/PostDetail";
 import { PostContent } from "./post/PostContent";
 import { TagList } from "./tags/TagList";
 import { TagProvider } from "./tags/TagProvider";
+import { TagForm } from "./tags/TagForm";
 
 
 export const ApplicationViews = () => {
@@ -41,6 +43,15 @@ export const ApplicationViews = () => {
               <Route exact path="/categories">
                 <CategoryList />
               </Route>
+            <Route exact path="/myposts">
+              <MyPostsList />
+            </Route>
+            
+            <Route exact path="/posts/:postId(\d+)">
+              <PostContent/>
+              <CommentForm />
+              <CommentList />
+            </Route>
 
 
               <Route exact path="/categories/new">
@@ -48,20 +59,25 @@ export const ApplicationViews = () => {
               </Route>
 
               <Route exact path="/posts">
-              <PostForm/>
-              <PostList />
-            </Route>
+                <PostForm/>
+                <PostList />
+              </Route>
+              
               <Route exact path="/myposts">
                 <MyPostsList />
               </Route>
+
               <Route exact path="/tags">
                 <TagList />
               </Route>
+              
+              <Route exact path="/tags/create">
+                <TagForm />
+              </Route>
 
-              <Route exact path="/posts/:postId(\d+)">
-              <PostContent/>
-              <CommentForm />
-            </Route>
+              <Route exact path="/tags/edit/:tagId(\d+)">
+                <TagForm />
+              </Route>
               
             </TagProvider>
           </CommentProvider>

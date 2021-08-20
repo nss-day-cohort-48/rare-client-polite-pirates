@@ -7,7 +7,7 @@ export const CategoryForm = () => {
   const {
     categories,
     createCategory,
-    getAllCategories,
+    getCategories,
     updateCategory,
     getCategoryById,
   } = useContext(CategoryContext);
@@ -18,7 +18,7 @@ export const CategoryForm = () => {
   const [currentCategory, setCurrentCategory] = useState({ label: "" });
 
   useEffect(() => {
-    getAllCategories();
+    getCategories();
   }, []);
 
   useEffect(() => {

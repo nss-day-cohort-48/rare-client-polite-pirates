@@ -12,7 +12,7 @@ export const PostDetail = ({ post }) => {
       </div>
       <div className="post__category">Category: {post.category?.label}</div>
       <Link to={`/posts/${post.id}`}>
-        Add Comment
+        Comments
       </Link>
     </section>
   );

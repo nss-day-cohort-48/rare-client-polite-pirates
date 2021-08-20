@@ -5,12 +5,13 @@ import { CategoryContext } from "./CategoryProvider";
 import { Category } from "./CategoryDetail";
 import "./Category.css";
 
+
 export const CategoryList = () => {
-  const { getAllCategories, categories } = useContext(CategoryContext);
+  const { getCategories, categories } = useContext(CategoryContext);
   const history = useHistory();
 
   useEffect(() => {
-    getAllCategories();
+    getCategories();
   }, []);
 
   return (
