@@ -8,10 +8,6 @@ export const PostDetail = ({ post }) => {
 
   const { posts, getPosts, deletePost} = useContext(PostContext);
 
-  // const {postId} = useParams()
-
-  // const deleteApost 
-  
   return (
     <section className="post">
       <h3 className="post__title">{post.title}</h3>
