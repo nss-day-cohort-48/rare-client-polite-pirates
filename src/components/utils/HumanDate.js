@@ -1,5 +1,5 @@
 export const HumanDate = ( date ) => {
-    return new Date(date * 1000).toLocaleDateString("en-US",
+    return new Date(date).toLocaleDateString("en-US",
     {
         weekday: 'long',
         year: 'numeric',
