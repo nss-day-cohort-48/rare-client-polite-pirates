@@ -1,8 +1,12 @@
 import React, { useContext, useEffect, useState} from "react";
-import { Link } from "react-router-dom"
+import { Link, useParams } from "react-router-dom"
+import { PostContext } from "./PostProvider";
 // import "./Post.css";
 
+
 export const PostDetail = ({ post }) => {
+
+  const { posts, getPosts, deletePost} = useContext(PostContext);
 
   return (
     <section className="post">
@@ -14,6 +18,7 @@ export const PostDetail = ({ post }) => {
       <Link to={`/posts/${post.id}`}>
         Comments
       </Link>
+      <button className="btn delete__btn" onClick={() => deletePost(post.id)}>Delete</button>
     </section>
   );
 };
